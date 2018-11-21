@@ -42,6 +42,6 @@ def index():
 
 @app.route('/selectDate', methods=['GET', 'POST'])
 def selectDate():
-    print(request.json['response1']['dateSelected'])
+    print(request.json['dateSelected'])
 
     return render_template('index.html', result=[{'text': 'aabcd', 'size': 100}])

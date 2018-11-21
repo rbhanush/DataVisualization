@@ -3,24 +3,28 @@
 <head>
     <title>LeadLine</title>
     <script src="http://d3js.org/d3.v3.min.js"></script>
+
     <script type="text/javascript" src="{{ url_for('static', filename='visualizations/d3.layout.cloud.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='visualizations/wordCloud.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='visualizations/worldMap.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='visualizations/entityGraph.js') }}"></script>
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="{{ url_for('static', filename='js/libs/modernizr-2.0.6.min.js') }}"></script>
     <script defer src="{{ url_for('static', filename='js/plugins.js') }}"></script>
     <script defer src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script src="{{ url_for('static', filename='js/CustomTooltip.js') }}"></script>
     <script src="{{ url_for('static', filename='js/libs/coffee-script.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/vis.js') }}"></script>
+
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 
-<style>
+<!-- <style>
     body {
         font-family:"Lucida Grande","Droid Sans",Arial,Helvetica,sans-serif;
     }
@@ -34,7 +38,7 @@
     .bld {
         font-weight: bold;
     }
-</style>
+</style> -->
 
 <body>
     <div id="years" class="YearOuter" align="left">
@@ -77,25 +81,24 @@
     displayWorldMap();
     displayEntityGraph();
 
-    // function loaddata(x) {
-    //     console.log(x)
-    //     var response1 = {'dateSelected': String(x)}
-    //     var xhr = new XMLHttpRequest();
-    //     xhr.open("POST", "/selectDate", true);
-    //     xhr.setRequestHeader('Content-Type', 'application/json');
-    //     xhr.send(JSON.stringify({response1}));
-    //     xhr.onload = function() {
-    //       // console.log(this.responseText);
-    //       var data = JSON.parse(this.responseText);
-    //       console.log(data)
-    //       var x = document.getElementById("date1").max = data['result']['end']
-    //       var x = document.getElementById("date1").min = data['result']['start']
-    //       var x = document.getElementById("date2").max = data['result']['end']
-    //       var x = document.getElementById("date2").min = data['result']['start']
-    //
-    //       var x = document.getElementById("players");
-    //       x.style.display="block";
-    //     }
-    // }
+    function loaddata(x) {
+        // var response1 = {'dateSelected': x}
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/selectDate", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({'dateSelected': x}));
+        // xhr.onload = function() {
+        //   console.log(this.responseText);
+        //   var data = JSON.parse(this.responseText);
+        //   console.log(data)
+        //   var x = document.getElementById("date1").max = data['result']['end']
+        //   var x = document.getElementById("date1").min = data['result']['start']
+        //   var x = document.getElementById("date2").max = data['result']['end']
+        //   var x = document.getElementById("date2").min = data['result']['start']
+        //
+        //   var x = document.getElementById("players");
+        //   x.style.display="block";
+        // }
+    }
 </script>
 </html>
