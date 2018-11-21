@@ -1,0 +1,98 @@
+﻿id,Entity,Mentions,Year,category
+1,Alejandra,18,2016,sameAl
+2,Alejandra El,9,2016,sameAl
+3,Alejandra La,26,2016,sameAl
+4,Don,9,2017,sameDon
+5,Don,29,2018,sameDon
+6,Hijacker,93,2016,sameH
+7,Hijacker s,13,2016,sameH
+8,Hijackers,5,2016,sameH
+9,Hijackers  ,6,2016,sameH
+10,Pres Trump,12,2017,sameT
+11,Trump,220,2017,sameT
+12,Trump,278,2018,sameT
+13,Armageddon,12,2017,diff
+14,Avio da Egyptair,7,2016,diff
+15,Bahan Peledak,12,2016,diff
+16,Barrasso Lee,9,2018,diff
+17,Bermuda,21,2018,diff
+18,Break Out,5,2017,diff
+19,CA,13,2017,diff
+20,Caitlyn Jenner,6,2016,diff
+21,Child Porn,8,2018,diff
+22,Chipre Varios,12,2016,diff
+23,Christine Ford,14,2018,diff
+24,Coffey Park,14,2017,diff
+25,de Alejandra,20,2016,diff
+26,de Egyptair,22,2016,diff
+27,de Larnaka,7,2016,diff
+28,Diablo,15,2017,diff
+29,Dipaksa Terbang,9,2016,diff
+30,Disaster Declaration,6,2017,diff
+31,Donald Trump,11,2018,diff
+32,DPRK,20,2017,diff
+33,Dude,9,2018,diff
+34,Egyptair yang,7,2016,diff
+35,ENGEL BROMWICH,35,2017,diff
+36,Entfhrtes Einige Passagiere,6,2016,diff
+37,Flight Alexandria,18,2016,diff
+38,Florence,8,2018,diff
+39,Gov Cooper,24,2018,diff
+40,Hallie Hill Animal Sanctuary,20,2018,diff
+41,Henry Cejudo,21,2017,diff
+42,Hillary Clinton,5,2017,diff
+43,Hurricane Maria,277,2018,diff
+44,Hurricane Rosa,131,2018,diff
+45,Hurricane Sergio,17,2018,diff
+46,Jeff Duncan,250,2018,diff
+47,Jemele Hill,107,2017,diff
+48,Jesus,11,2018,diff
+49,Jordan Lake,11,2018,diff
+50,Kaherah dirampas,21,2016,diff
+51,Kavanaugh,129,2018,diff
+52,Kini,21,2016,diff
+53,Larnaka,13,2016,diff
+54,Learn,14,2017,diff
+55,Leslie,22,2018,diff
+56,Leslie Becomes,29,2018,diff
+57,Leslie Not,23,2018,diff
+58,Leslie Strengthens,18,2018,diff
+59,Lo,7,2016,diff
+60,McConnell,9,2018,diff
+61,Mike Pence,28,2017,diff
+62,Mona Lisa,12,2018,diff
+63,Non Et,5,2016,diff
+64,Oct  Operation Hurricane,172,2018,diff
+65,Paul Democrats,8,2018,diff
+66,Photos Wildfires,9,2017,diff
+67,Plane,18,2016,diff
+68,Postseason,62,2018,diff
+69,Rosa,17,2018,diff
+70,Santa Rosa,4,2017,diff
+71,Santa Rosa California,11,2017,diff
+72,Segn,11,2016,diff
+73,Set,7,2017,diff
+74,Siprus,34,2016,diff
+75,Siprus Pesawat,7,2016,diff
+76,Siprus Sebuah,8,2016,diff
+77,Standby,20,2018,diff
+78,Storm Leslie,20,2018,diff
+79,Ted Cruz,15,2018,diff
+80,THOMAS FULLER JONAH,39,2017,diff
+81,Threats,20,2018,diff
+82,Ton,5,2016,diff
+83,Tony Alsup,8,2018,diff
+84,Trump Approves,8,2017,diff
+85,Truth,10,2018,diff
+86,Twitter,311,2017,diff
+87,Vox,16,2018,diff
+88,Walaka,11,2018,diff
+89,Wash Greenbelt,13,2018,diff
+90,Wildfires,20,2017,diff
+91,Wildfires Destroy Their Homes,7,2017,diff
+92,Wildfires Kill,15,2017,diff
+93,Wildfires Spread,11,2017,diff
+94,Wildfires Sweep Across Northern California,36,2017,diff
+95,Wilmington NC s,8,2018,diff
+96,Wine Country  s,34,2017,diff
+97,Witch Lyn,8,2018,diff

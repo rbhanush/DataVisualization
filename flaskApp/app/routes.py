@@ -3,18 +3,23 @@ import gensim
 from app import app
 import pickle
 from flask import jsonify, render_template, request
-
+from flask_wtf import Form
 
 @app.route('/')
 @app.route('/index', methods=['GET', 'POST'])
 def index():
-    count = request.args.get('words')
+    if request.method == 'POST':
+      count = request.form['words']
+
+    else:
+      count = request.args.get('words')
+
     default = 50
     count = int(count) if count else default
     temp = {}
     num_topics = 10
 
-    lda = gensim.models.ldamodel.LdaModel.load('model.gensim')
+    lda = gensim.models.ldamodel.LdaModel.load('app/lda/florence/model.gensim')
 
     topic_summaries = []
     for i in range(num_topics):
@@ -27,9 +32,16 @@ def index():
     result = {}
     res = []
     for i in temp[:count]:
+
         result['text'] = i[0]
-        result['size'] = round(i[1]*1000)
+        result['size'] = round(i[1]*500)
         res.append(result)
         result = {}
-    # return jsonify(res)
-    return render_template('index.html', result=res)
+    res1 = [res, 'Hello']
+    return render_template('index.html', result=res1)
+
+@app.route('/selectDate', methods=['GET', 'POST'])
+def selectDate():
+    print(request.json['response1']['dateSelected'])
+
+    return render_template('index.html', result=[{'text': 'aabcd', 'size': 100}])
