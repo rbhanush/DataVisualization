@@ -1,5 +1,4 @@
 function displayWorldMap(mapPath) {
-  console.log(mapPath);
   Plotly.d3.csv(mapPath, function(err, rows){
     function unpack(rows, key) {
         return rows.map(function(row) { return row[key]; });

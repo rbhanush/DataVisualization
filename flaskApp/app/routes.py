@@ -46,4 +46,5 @@ def selectDate():
 
     final['mapData'] = '/static/data/' + year + '/' + event + '/forMap.csv'
 
+    final['mapData1'] = '/static/data/' + year + '/' + event + '/forMap1.csv'
     return jsonify(final)
