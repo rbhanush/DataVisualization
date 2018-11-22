@@ -9,7 +9,7 @@
     <script type="text/javascript" src="{{ url_for('static', filename='visualizations/worldMap.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='visualizations/entityGraph.js') }}"></script>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
@@ -24,30 +24,55 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 
-<!-- <style>
-    body {
-        font-family:"Lucida Grande","Droid Sans",Arial,Helvetica,sans-serif;
+<style>
+    .toHide1, .toHide2, .toHide3 {
+      display: none;
     }
-    .legend {
-        border: 1px solid #555555;
-        border-radius: 5px 5px 5px 5px;
-        font-size: 0.8em;
-        margin: 10px;
-        padding: 8px;
+    .container {
+      display: none;
     }
-    .bld {
-        font-weight: bold;
-    }
-</style> -->
+</style>
 
 <body>
-    <div id="years" class="YearOuter" align="left">
+    <div id="years" class="YearOuter" align="center">
       <b style="color:#008ed6;margin-top:250px; font-weight: bold; font-size:120%;">Select a Year</b>
-      <select id="optionSelected" onchange="loaddata(this.value)">
+      <select id="optionSelected" onchange="loadEvents(this.value)">
           <option value="" disabled selected>None</option>
           <option value="2016">2016</option>
           <option value="2017">2017</option>
           <option value="2018">2018</option>
+      </select>
+    </div>
+
+    <br>
+
+    <div id="events2016" class="toHide1" align="center">
+      <b style="color:#008ed6;margin-top:250px; font-weight: bold; font-size:120%;">Select an Event</b>
+      <select id="optionSelected" onchange="sendData(this.value)">
+          <option value="" disabled selected>None</option>
+          <option value="2016One">2016One</option>
+          <option value="2016Two">2016Two</option>
+          <option value="2016Three">2016Three</option>
+      </select>
+    </div>
+
+    <div id="events2017" class="toHide2" align="center">
+      <b style="color:#008ed6;margin-top:250px; font-weight: bold; font-size:120%;">Select an Event</b>
+      <select id="optionSelected" onchange="sendData(this.value)">
+          <option value="" disabled selected>None</option>
+          <option value="2017One">2017One</option>
+          <option value="2017Two">2017Two</option>
+          <option value="2017Three">2017Three</option>
+      </select>
+    </div>
+
+    <div id="events2018" class="toHide3" align="center">
+      <b style="color:#008ed6;margin-top:250px; font-weight: bold; font-size:120%;">Select an Event</b>
+      <select id="optionSelected" onchange="sendData(this.value)">
+          <option value="" disabled selected>None</option>
+          <option value="2018One">2018One</option>
+          <option value="2018Two">2018Two</option>
+          <option value="2018Three">2018Three</option>
       </select>
     </div>
 
@@ -65,40 +90,57 @@
         <div id="vis"></div>
       </div>
     </div>
-
-    <!-- <form action = "http://localhost:5000/index" method = "post">
-          <p>Enter Number of words:</p>
-          <p><input type = "number" name = "words" /></p>
-          <p><input type = "submit" value = "submit" /></p>
-    </form> -->
 </body>
 
 <script>
+    var selectedYear;
+    var selectedEvent;
     var data;
-    data = {{result | tojson}};
 
-    displayWordCloud(data[0]);
-    displayWorldMap();
     displayEntityGraph();
 
-    function loaddata(x) {
-        // var response1 = {'dateSelected': x}
+    function loadEvents(x) {
+        selectedYear = x;
+        document.getElementById("wordCloudDisp").innerHTML = "";
+        document.getElementById("worldMapDisp").innerHTML = "";
+        document.getElementById("container").style.display="none";
+
+        if (x == "2016") {
+            document.getElementById("events2016").style.display="block";
+            document.getElementById("events2017").style.display="none";
+            document.getElementById("events2018").style.display="none";
+        } else if (x == "2017") {
+            document.getElementById("events2016").style.display="none";
+            document.getElementById("events2017").style.display="block";
+            document.getElementById("events2018").style.display="none";
+        } else if (x == "2018") {
+            document.getElementById("events2016").style.display="none";
+            document.getElementById("events2017").style.display="none";
+            document.getElementById("events2018").style.display="block";
+        }
+    }
+
+    function sendData(x) {
+        selectedEvent = x;
+        responseData = {'yearSelected': selectedYear, 'eventSelected': selectedEvent}
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "/selectDate", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify({'dateSelected': x}));
-        // xhr.onload = function() {
-        //   console.log(this.responseText);
-        //   var data = JSON.parse(this.responseText);
-        //   console.log(data)
-        //   var x = document.getElementById("date1").max = data['result']['end']
-        //   var x = document.getElementById("date1").min = data['result']['start']
-        //   var x = document.getElementById("date2").max = data['result']['end']
-        //   var x = document.getElementById("date2").min = data['result']['start']
-        //
-        //   var x = document.getElementById("players");
-        //   x.style.display="block";
-        // }
+        xhr.send(JSON.stringify(responseData));
+
+        xhr.onload = function() {
+          data = JSON.parse(this.responseText);
+          document.getElementById("wordCloudDisp").innerHTML = "";
+          document.getElementById("worldMapDisp").innerHTML = "";
+          if (document.getElementById("container").style.display == "block") {
+            document.getElementById("container").style.display="none";
+          }
+          setTimeout(function() {
+            displayWordCloud(data['ldaData']);
+            displayWorldMap(data['mapData'])
+            document.getElementById("container").style.display="block";
+          }, 100);
+        }
     }
 </script>
 </html>

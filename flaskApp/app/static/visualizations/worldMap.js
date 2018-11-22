@@ -1,5 +1,6 @@
-function displayWorldMap() {
-  Plotly.d3.csv("/static/florence.csv", function(err, rows){
+function displayWorldMap(mapPath) {
+  console.log(mapPath);
+  Plotly.d3.csv(mapPath, function(err, rows){
     function unpack(rows, key) {
         return rows.map(function(row) { return row[key]; });
       }
@@ -19,6 +20,6 @@ function displayWorldMap() {
           }
         }
   };
-  Plotly.plot(worldMapDisp, data, layout, {showLink: false});
+  Plotly.newPlot('worldMapDisp', data, layout, {showLink: false});
   });
 }
