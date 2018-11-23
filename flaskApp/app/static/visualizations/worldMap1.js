@@ -30,6 +30,8 @@ function displayWorldMap1(mapPath1)  {
        .attr("cy", function(d) {
           return projection([d.Longitude, d.Latitude])[1];
        })
+       .attr('fill','steelblue')
+       .attr('fill-opacity', .6)
        .attr("r", function(d) { return (d.radius)*4; })
        .on("mouseover", function(d) {
           d3.select(this).style("fill","#FC0");
@@ -67,5 +69,8 @@ function displayWorldMap1(mapPath1)  {
       .enter()
       .append("path")
       .attr("d", path)
+      .attr("stroke", "white")
+      .attr("stroke-width", "0.27px")
+      .attr("fill", "grey")
   });
 }
