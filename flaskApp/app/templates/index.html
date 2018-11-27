@@ -7,8 +7,9 @@
 
     <script type="text/javascript" src="{{ url_for('static', filename='visualizations/d3.layout.cloud.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='visualizations/wordCloud.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='visualizations/worldMap.js') }}"></script>
+    <!-- <script type="text/javascript" src="{{ url_for('static', filename='visualizations/worldMap.js') }}"></script> -->
     <script type="text/javascript" src="{{ url_for('static', filename='visualizations/worldMap1.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='visualizations/riverTheme.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='visualizations/entityGraph.js') }}"></script>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -39,7 +40,7 @@
 </style>
 
 <body>
-    <div id="years" class="YearOuter" align="center">
+    <!-- <div id="years" class="YearOuter" align="center">
       <b style="color:#008ed6;margin-top:250px; font-weight: bold; font-size:120%;">Select a Year</b>
       <select id="optionSelected" onchange="loadEvents(this.value)">
           <option value="" disabled selected>None</option>
@@ -49,9 +50,9 @@
       </select>
     </div>
 
-    <br>
+    <br> -->
 
-    <div id="events2016" class="toHide1" align="center">
+    <!-- <div id="events2016" class="toHide1" align="center">
       <b style="color:#008ed6;margin-top:250px; font-weight: bold; font-size:120%;">Select an Event</b>
       <select id="optionSelected" onchange="sendData(this.value)">
           <option value="" disabled selected>None</option>
@@ -79,13 +80,16 @@
           <option value="2018Two">2018Two</option>
           <option value="2018Three">2018Three</option>
       </select>
-    </div>
+    </div> -->
 
     <div id="wordCloudDisp" class="wordCloud"></div>
 
-    <div id="worldMapDisp" class="worldMap"></div>
+    <!-- <div id="worldMapDisp" class="worldMap"></div> -->
 
     <div id="worldMapDisp1" class="worldMap1"></div>
+
+    <div id="riverThemeDisp" class="riverTheme"></div>
+
 
     <div id="container" class="container">
       <header><h1>Entity View</h1></header>
@@ -104,6 +108,7 @@
     var selectedEvent;
     var data;
 
+    document.getElementById("container").style.display="block";
     displayEntityGraph();
 
     function loadEvents(x) {
@@ -128,9 +133,11 @@
         }
     }
 
-    function sendData(x) {
+    function sendData(y, x) {
+        selectedYear = y;
         selectedEvent = x;
         responseData = {'yearSelected': selectedYear, 'eventSelected': selectedEvent}
+        console.log(responseData);
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "/selectDate", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
@@ -139,16 +146,16 @@
         xhr.onload = function() {
           data = JSON.parse(this.responseText);
           document.getElementById("wordCloudDisp").innerHTML = "";
-          document.getElementById("worldMapDisp").innerHTML = "";
+          // document.getElementById("worldMapDisp").innerHTML = "";
           document.getElementById("worldMapDisp1").innerHTML = "";
-          if (document.getElementById("container").style.display == "block") {
-            document.getElementById("container").style.display="none";
-          }
+          // if (document.getElementById("container").style.display == "block") {
+          //   document.getElementById("container").style.display="none";
+          // }
           setTimeout(function() {
             displayWordCloud(data['ldaData']);
-            displayWorldMap(data['mapData']);
+            // displayWorldMap(data['mapData']);
             displayWorldMap1(data['mapData1']);
-            document.getElementById("container").style.display="block";
+            // document.getElementById("container").style.display="block";
           }, 100);
         }
     }

@@ -7,6 +7,7 @@
     function BubbleChart(data) {
       this.hide_details = __bind(this.hide_details, this);
       this.show_details = __bind(this.show_details, this);
+      this.get_details = __bind(this.get_details, this);
       this.hide_years = __bind(this.hide_years, this);
       this.display_years = __bind(this.display_years, this);
       this.move_towards_year = __bind(this.move_towards_year, this);
@@ -96,7 +97,10 @@
         return "bubble_" + d.id;
       }).on("mouseover", function(d, i) {
         return that.show_details(d, i, this);
-      }).on("mouseout", function(d, i) {
+      }).on("click", function(d, i) {
+        displayRiverTheme(d.year);
+        return that.hide_details(d, i, this);})
+      .on("mouseout", function(d, i) {
         return that.hide_details(d, i, this);
       });
       return this.circles.transition().duration(2000).attr("r", function(d) {
@@ -191,6 +195,10 @@
       content += "<span class=\"name\">Mentions:</span><span class=\"value\"> " + data.value + "</span><br/>";
       content += "<span class=\"name\">Year:</span><span class=\"value\"> " + data.year + "</span>";
       return this.tooltip.showTooltip(content, d3.event);
+    };
+
+    BubbleChart.prototype.get_details = function(data, i, element) {
+      return data.year;
     };
 
     BubbleChart.prototype.hide_details = function(data, i, element) {
