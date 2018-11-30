@@ -3,8 +3,8 @@ function displayRiverTheme(selectedYear) {
   document.getElementById("worldMapDisp1").innerHTML = "";
   document.getElementById("riverThemeDisp").innerHTML = "";
   var csvpath = "/static/data/" + selectedYear + "/mainData.csv";
+  console.log(csvpath);
   chart(csvpath, "blue");
-  eventSelected = selectedYear+'One';
 
   var datearray = [];
   var colorrange = [];
@@ -139,8 +139,7 @@ function displayRiverTheme(selectedYear) {
         .attr("stroke-width", "0.5px")
         .on("click", function(d) {
           console.log(d.key);
-
-          sendData(selectedYear, eventSelected);
+          sendData(selectedYear, d.key);
         }),
         tooltip.html( "<p>" + d.key + "<br>" + pro + "</p>" ).style("visibility", "visible");
 

@@ -34,18 +34,22 @@ function displayWorldMap1(mapPath1)  {
        .attr('fill-opacity', .6)
        .attr("r", function(d) { return (d.radius)*4; })
        .on("mouseover", function(d) {
-          d3.select(this).style("fill","#FC0");
-          d3.select(this).append("text")
-          .attr("x", function(d) {return projection([d.Longitude, d.Latitude])[0];},
-                "y", function(d) {return projection([d.Longitude, d.Latitude])[1];}
-                .style("fill", "black")
-                .attr("text-anchor", "left")
-                .attr("font-size", "17px")
-                .text(function(d) {return d.Mentions;})
-              )
+          d3.select(this).style("fill", "#FC0");
+          var xPosition = projection([d.Longitude, d.Latitude])[0] ;
+          var yPosition = projection([d.Longitude, d.Latitude])[1];
+          g.append("text")
+            .attr("id", "hoverLabel")
+            .attr("x", xPosition)
+            .attr("y", yPosition)
+            .attr("text-anchor", "start")
+            .attr("font-family", "ff-nuvo-sc-web-pro-1,ff-nuvo-sc-web-pro-2, sans-serif")
+            .attr("font-size", "20px")
+            .attr("fill", "black")
+            .text(d.Country);
         })
         .on("mouseout", function(d) {
           d3.select(this).style("fill","steelblue");
+          d3.select("#hoverLabel").remove();
         });
     g.selectAll("text")
       .data(data)

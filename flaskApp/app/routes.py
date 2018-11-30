@@ -41,10 +41,29 @@ def selectDate():
     year = request.json['yearSelected']
     event = request.json['eventSelected']
 
+    if event == 'Cyclone Pam':
+        event = 'CyclonePam'
+    elif event == 'Germanwings Crash':
+        event = 'Germanwings'
+    elif event == 'Paris Attacks':
+        event = 'ParisAttacks'
+    elif event == 'Brexit':
+        event = 'Brexit'
+    elif event == 'Irish General Election':
+        event = 'IrishGE'
+    elif event == 'Lahore Blast':
+        event = 'LahoreBlast'
+    elif event == 'California Wildfire':
+        event = 'CaliforniaWildfire'
+    elif event == 'Hurricane Harvey':
+        event = 'HurricaneHarvey'
+    elif event == 'Iraq Earthquake':
+        event = 'IraqEarthquake'
+    elif event == 'Hurricane Florence':
+        event ='HurricaneFlorence'
+
     res = ldaEvent(year, event)
     final['ldaData'] = res
-
-    final['mapData'] = '/static/data/' + year + '/' + event + '/forMap.csv'
 
     final['mapData1'] = '/static/data/' + year + '/' + event + '/forMap1.csv'
     return jsonify(final)

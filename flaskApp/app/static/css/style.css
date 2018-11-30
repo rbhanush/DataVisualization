@@ -19,7 +19,7 @@ footer {
 
 .years {
   font-size: 21px;
-  fill: #aaa;
+  fill: black;
 }
 
 .tooltip {
@@ -47,4 +47,3 @@ footer {
 .tooltip .name {
   font-weight:bold;
 }
-

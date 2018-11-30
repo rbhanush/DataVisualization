@@ -7,7 +7,6 @@
     function BubbleChart(data) {
       this.hide_details = __bind(this.hide_details, this);
       this.show_details = __bind(this.show_details, this);
-      this.get_details = __bind(this.get_details, this);
       this.hide_years = __bind(this.hide_years, this);
       this.display_years = __bind(this.display_years, this);
       this.move_towards_year = __bind(this.move_towards_year, this);
@@ -19,24 +18,28 @@
       this.create_nodes = __bind(this.create_nodes, this);
       var max_amount;
       this.data = data;
-      this.width = 940;
-      this.height = 600;
+      this.width = 1100;
+      this.height = 725;
       this.tooltip = CustomTooltip("top100Entities", 240);
       this.center = {
         x: this.width / 2,
         y: this.height / 2
       };
       this.year_centers = {
-        "2016": {
-          x: this.width / 3,
+        "2015": {
+          x: 330,
           y: this.height / 2
         },
-        "2017": {
+        "2016": {
           x: this.width / 2,
           y: this.height / 2
         },
+        "2017": {
+          x: this.width - 400,
+          y: this.height / 2
+        },
         "2018": {
-          x: 2 * this.width / 3,
+          x:  this.width - 300,
           y: this.height / 2
         }
       };
@@ -46,7 +49,7 @@
       this.nodes = [];
       this.force = null;
       this.circles = null;
-      this.fill_color = d3.scale.ordinal().domain(["sameAl", "sameH", "sameT", "sameDon", "diff"]).range(["#DAF7A6", "#FFC300", "#FF5733", "#C70039", "#8633FF"]);
+      this.fill_color = d3.scale.ordinal().domain(["sameBar", "sameCa", "sameTrump", "sameDon", "sameWildFire", "diff"]).range(["#DAF7A6", "#FFC300", "#FF5733", "#C70039", "#8633FF", "#4286f4"]);
       max_mentions = d3.max(this.data, function(d) {
         return parseInt(d.Mentions);
       });
@@ -168,9 +171,10 @@
     BubbleChart.prototype.display_years = function() {
       var years, years_data, years_x;
       years_x = {
-        "2016": 160,
-        "2017": this.width / 2,
-        "2018": this.width - 160
+        "2015": 175,
+        "2016": 20 + this.width / 2,
+        "2017": 20 + this.width - 300,
+        "2018": 20 + this.width - 100
       };
       years_data = d3.keys(years_x);
       years = this.vis.selectAll(".years").data(years_data);
@@ -243,7 +247,7 @@
         }
       };
     })(this);
-    return d3.csv("/static/top100Entities.csv", render_vis);
+    return d3.csv("/static/top100Entities_update.csv", render_vis);
   });
 
 }).call(this);
