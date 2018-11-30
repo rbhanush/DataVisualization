@@ -3,7 +3,6 @@ function displayRiverTheme(selectedYear) {
   document.getElementById("worldMapDisp1").innerHTML = "";
   document.getElementById("riverThemeDisp").innerHTML = "";
   var csvpath = "/static/data/" + selectedYear + "/mainData.csv";
-  console.log(csvpath);
   chart(csvpath, "blue");
 
   var datearray = [];
@@ -25,10 +24,10 @@ function displayRiverTheme(selectedYear) {
   var format = d3.time.format("%m/%d/%y");
 
   var margin = {top: 20, right: 40, bottom: 30, left: 30};
-  var width = document.body.clientWidth - margin.left - margin.right;
+  var width = 900
   var height = 400 - margin.top - margin.bottom;
 
-  var tooltip = d3.select("body")
+  var tooltip = d3.select("#riverThemeDisp")
       .append("div")
       .attr("class", "remove")
       .style("position", "absolute")
@@ -41,7 +40,7 @@ function displayRiverTheme(selectedYear) {
       .range([0, width]);
 
   var y = d3.scale.linear()
-      .range([height-10, 0]);
+      .range([height, 0]);
 
   var z = d3.scale.ordinal()
       .range(colorrange);
@@ -67,7 +66,7 @@ function displayRiverTheme(selectedYear) {
       .key(function(d) { return d.key; });
 
   var area = d3.svg.area()
-      .interpolate("cardinal")
+      .interpolate("bundle")
       .x(function(d) { return x(d.date); })
       .y0(function(d) { return y(d.y0); })
       .y1(function(d) { return y(d.y0 + d.y); });
@@ -119,29 +118,17 @@ function displayRiverTheme(selectedYear) {
           return j != i ? 0.6 : 1;
       })})
 
+      .on("click", function(d) {
+        sendData(selectedYear, d.key);
+      })
+
       .on("mousemove", function(d, i) {
-        mousex = d3.mouse(this);
-        mousex = mousex[0];
-        var invertedx = x.invert(mousex);
-        invertedx = invertedx.getMonth() + invertedx.getDate();
-        var selected = (d.values);
-        for (var k = 0; k < selected.length; k++) {
-          datearray[k] = selected[k].date
-          datearray[k] = datearray[k].getMonth() + datearray[k].getDate();
-        }
-
-        mousedate = datearray.indexOf(invertedx);
-        pro = d.values[mousedate].value;
-
         d3.select(this)
         .classed("hover", true)
         .attr("stroke", strokecolor)
         .attr("stroke-width", "0.5px")
-        .on("click", function(d) {
-          console.log(d.key);
-          sendData(selectedYear, d.key);
-        }),
-        tooltip.html( "<p>" + d.key + "<br>" + pro + "</p>" ).style("visibility", "visible");
+        // tooltip.html( "<p>" + d.key + "<br>" + pro + "</p>" ).style("visibility", "visible");
+
 
       })
       .on("mouseout", function(d, i) {
@@ -151,31 +138,9 @@ function displayRiverTheme(selectedYear) {
         .attr("opacity", "1");
         d3.select(this)
         .classed("hover", false)
-        .attr("stroke-width", "0px"), tooltip.html( "<p>" + d.key + "<br>" + pro + "</p>" ).style("visibility", "hidden");
+        .attr("stroke-width", "0px");
         // .on("click", function(d) {console.log(d.key); });
     })
-
-    var vertical = d3.select("#riverThemeDisp")
-          .append("div")
-          .attr("class", "remove")
-          .style("position", "absolute")
-          .style("z-index", "19")
-          .style("width", "1px")
-          .style("height", "380px")
-          .style("top", "10px")
-          .style("bottom", "30px")
-          .style("left", "0px")
-          .style("background", "#fff");
-
-    d3.select("#riverThemeDisp")
-        .on("mousemove", function(){
-           mousex = d3.mouse(this);
-           mousex = mousex[0] + 5;
-           vertical.style("left", mousex + "px" )})
-        .on("mouseover", function(){
-           mousex = d3.mouse(this);
-           mousex = mousex[0] + 5;
-           vertical.style("left", mousex + "px")});
   });
   }
 }

@@ -1,7 +1,7 @@
 function displayWordCloud (frequency_list) {
   var color = d3.scale.linear()
-          .domain([0,1,2,3,4,5,6,10,15,20,100])
-          .range(["#ddd", "#ccc", "#bbb", "#aaa", "#999", "#888", "#777", "#666", "#555", "#444", "#333", "#222"]);
+                .domain([1,3,10,20,50])
+                .range(["#66c2a5","#fc8d62","#8da0cb","#e78ac3","#a6d854"]);
 
   d3.layout.cloud().size([800, 300])
           .words(frequency_list)
@@ -16,8 +16,6 @@ function displayWordCloud (frequency_list) {
               .attr("height", 350)
               .attr("class", "wordcloud")
               .append("g")
-              // without the transform, words words would get cutoff to the left and top, they would
-              // appear outside of the SVG area
               .attr("transform", "translate(320,200)")
               .selectAll("text")
               .data(words)

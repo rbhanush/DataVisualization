@@ -4,6 +4,7 @@
     <title>LeadLine</title>
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="http://d3js.org/topojson.v0.min.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 
     <script type="text/javascript" src="{{ url_for('static', filename='visualizations/d3.layout.cloud.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='visualizations/wordCloud.js') }}"></script>
@@ -36,12 +37,6 @@
 </style>
 
 <body>
-    <div id="wordCloudDisp" class="wordCloud"></div>
-
-    <div id="worldMapDisp1" class="worldMap1"></div>
-
-    <div id="riverThemeDisp" class="riverTheme"></div>
-
     <div id="container" class="container">
       <header><h1>Entity View</h1></header>
       <div id="main" role="main">
@@ -52,6 +47,23 @@
         <div id="vis"></div>
       </div>
     </div>
+
+    <br>
+
+    <div id="riverThemeDisp" class="riverTheme" align="center"></div>
+
+    <br>
+
+    <table align="center">
+      <tr>
+        <td>
+          <div id="wordCloudDisp" class="wordCloud" align="center"></div>
+        </td>
+        <td>
+          <div id="worldMapDisp1" class="worldMap1" align="center"></div>
+        </td>
+      </tr>
+    </table>
 </body>
 
 <script>
